@@ -1,16 +1,31 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-
+    <h1 v-if="states">{{ msg }}</h1>
+    <el-button @click="changeState">切换</el-button>
+    <el-input v-model="msg"></el-input>
+    <ul>
+      <li v-for="(item,index) in list"
+          :key="index">{{item}}</li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class HelloWorld extends Vue {
-  private msg: string = "测试";
+  private msg: string = '测试'
+  private states: boolean = false
+  private list: any[] = ['唱歌', '跳舞', '喝酒', 1, 5]
+
+  created() {
+    this.msg = '生命'
+  }
+
+  changeState(): void {
+    this.states = !this.states
+  }
 }
 </script>
 

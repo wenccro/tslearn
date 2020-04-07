@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Index from '../components/HelloWorld.vue'
+import Test from '../components/contrast.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,12 @@ const routes: RouteConfig[] = [
     name: 'Index',
     component: Index,
   },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test,
+  },
+
   {
     path: '/about',
     name: 'About',

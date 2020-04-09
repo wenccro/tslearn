@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Index from '../components/HelloWorld.vue'
 import Test from '../components/contrast.vue'
+import Father from '../components/fatherPage.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes: RouteConfig[] = [
     path: '/test',
     name: 'Test',
     component: Test,
+  },
+  {
+    path: '/father',
+    name: 'Father',
+    component: Father,
   },
 
   {

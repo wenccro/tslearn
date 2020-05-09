@@ -1,5 +1,9 @@
 <template>
   <div class="hello">
+    <div>state-{{firstName}}</div>
+    <div>getter-{{fullName}}</div>
+    <el-button @click="changeVuex">跟换store</el-button>
+    <el-button @click="changeVuex1">跟换store action</el-button>
     <h1 v-if="states">{{ msg }}</h1>
     <el-button @click="changeState">切换</el-button>
     <el-input v-model="msg"></el-input>
@@ -19,6 +23,8 @@
 <script lang="ts">
 import ChildPage from '../views/childCom.vue'
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+const userModule = namespace('user')
 
 @Component({
   components: {
@@ -33,13 +39,31 @@ export default class HelloWorld extends Vue {
 
   private myChild: any = null
 
+  @userModule.State('firstName') public firstName!: string
+  @userModule.Getter('fullName') public fullName!: string
+  @userModule.Mutation('changeMobile') public changeMobile!: Function
+  @userModule.Action('changeAction') public changeAction!: Function
+
   created() {
     this.msg = '生命'
+    this.changeMobile('www')
   }
 
   changeState(): void {
     this.states = !this.states
   }
+
+  changeVuex() {
+    const times = new Date()
+    const str = 'test' + times.getTime()
+    this.changeMobile(str)
+  }
+  changeVuex1() {
+    this.changeAction('actions')
+  }
+  /**
+   * 父亲调用子元素方法
+   */
   fatherToChild(): void {
     (this.$refs.myChild as any).showMethod('父掉子方法')
   }
